@@ -39,7 +39,7 @@ function App() {
           color: '#2a5d7c',
         }}
       >
-        <h1>גלית ריכטר - פיזיותרפיסטית</h1>
+        <h1><span className="hero-title-bg">גלית ריכטר - פיזיותרפיסטית</span></h1>
         <h2 className="hero-subtitle highlight-bg">קליניקה בקדימה צורן</h2>
         <p className="hero-desc">ברוכים הבאים לקליניקה החדשה לפיזיותרפיה</p>
       </section>
@@ -76,10 +76,36 @@ function App() {
           </div>
         </div>
       </section>
-      <section id="testimonials" className="testimonials" style={{ background: `url(${testimonialImg}) no-repeat center/cover`, borderRadius: 12, padding: 24 }}>
+      <section id="testimonials" className="testimonials">
         <h2>המלצות</h2>
-        <blockquote>"גלית מקצועית, קשובה ומסורה. ממליצה בחום!"</blockquote>
-        <blockquote>"הטיפול עזר לי מאוד, תודה רבה!"</blockquote>
+        <div className="testimonial-row">
+          <div className="testimonial-portrait">
+            {/* Woman wireframe SVG */}
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="18" r="10" stroke="#bcd0e5" strokeWidth="2"/><ellipse cx="24" cy="38" rx="14" ry="8" stroke="#bcd0e5" strokeWidth="2"/></svg>
+          </div>
+          <blockquote>"גלית מקצועית, קשובה ומסורה. ממליצה בחום!"</blockquote>
+        </div>
+        <div className="testimonial-row">
+          <div className="testimonial-portrait">
+            {/* Man wireframe SVG */}
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="18" r="10" stroke="#bcd0e5" strokeWidth="2"/><rect x="14" y="32" width="20" height="10" rx="5" stroke="#bcd0e5" strokeWidth="2"/></svg>
+          </div>
+          <blockquote>"הטיפול עזר לי מאוד, תודה רבה!"</blockquote>
+        </div>
+        <div className="testimonial-row">
+          <div className="testimonial-portrait">
+            {/* Woman wireframe SVG */}
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="18" r="10" stroke="#bcd0e5" strokeWidth="2"/><ellipse cx="24" cy="38" rx="14" ry="8" stroke="#bcd0e5" strokeWidth="2"/></svg>
+          </div>
+          <blockquote>"הגעתי לגלית עם כאבים ממושכים, וקיבלתי טיפול מקצועי ואישי."</blockquote>
+        </div>
+        <div className="testimonial-row">
+          <div className="testimonial-portrait">
+            {/* Man wireframe SVG */}
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="18" r="10" stroke="#bcd0e5" strokeWidth="2"/><rect x="14" y="32" width="20" height="10" rx="5" stroke="#bcd0e5" strokeWidth="2"/></svg>
+          </div>
+          <blockquote>"ממליץ בחום על גלית! סבלנות, מקצועיות ותוצאות מעולות."</blockquote>
+        </div>
       </section>
       <section id="contact" className="contact">
         <h2>צור קשר</h2>

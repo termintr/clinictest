@@ -11,6 +11,12 @@ html {
   scroll-padding-top: 90px;
 }
 
+@media (max-width: 600px) {
+  html {
+    scroll-padding-top: 110px;
+  }
+}
+
 .navbar {
   background: #fff;
   box-shadow: 0 2px 8px rgba(0,0,0,0.04);
@@ -407,5 +413,45 @@ section, .service-block p, .service-block h3 {
   }
   .about-title {
     font-size: 1.5rem;
+  }
+}
+
+.hero-title-bg {
+  background: rgba(255,255,255,0.92);
+  color: #2a5d7c;
+  padding: 0.5em 1.5em;
+  border-radius: 1.5em;
+  font-weight: 900;
+  font-size: 2.1rem;
+  box-shadow: 0 2px 16px rgba(42,93,124,0.13);
+  text-shadow: 0 2px 8px rgba(42,93,124,0.13), 0 1px 0 #fff;
+  display: inline-block;
+}
+
+.testimonial-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.2em;
+  margin-bottom: 1.5em;
+}
+.testimonial-portrait {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 48px;
+}
+@media (max-width: 600px) {
+  .hero-title-bg {
+    font-size: 1.3rem;
+    padding: 0.4em 0.7em;
+  }
+  .testimonial-row {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5em;
+  }
+  .testimonial-portrait {
+    margin-bottom: 0.3em;
   }
 }
