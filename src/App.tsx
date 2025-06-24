@@ -1,6 +1,6 @@
 import './App.css'
 import { useState } from 'react'
-import logo from '../public/assets/Taliayaniv_logo.png'
+import logo from '../public/assets/cliniclogo.jpg'
 import heroImg from '../public/assets/clinicback2_edited.jpg'
 import aboutImg from '../public/assets/85f255_51f2688bcdd445bc9072ebac0bea5cd4~mv2.jpg'
 import leavesImg from '../public/assets/Leaves.png'
@@ -40,13 +40,13 @@ function App() {
         }}
       >
         <h1>גלית ריכטר - פיזיותרפיסטית</h1>
-        <h2 className="hero-subtitle">קליניקה בקדימה צורן</h2>
+        <h2 className="hero-subtitle highlight-bg">קליניקה בקדימה צורן</h2>
         <p className="hero-desc">ברוכים הבאים לקליניקה החדשה לפיזיותרפיה</p>
       </section>
-      <section id="about" className="about" style={{ display: 'flex', alignItems: 'center', gap: 24 }}>
-        <img src={aboutImg} alt="גלית ריכטר" style={{ width: 120, height: 120, borderRadius: '50%', objectFit: 'cover', marginLeft: 24 }} />
+      <section id="about" className="about">
+        <h2 className="about-title">אודות</h2>
+        <img src={aboutImg} alt="גלית ריכטר" className="about-img" />
         <div>
-          <h2>אודות</h2>
           <p>גלית ריכטר, פיזיותרפיסטית מוסמכת עם ניסיון רב בטיפול במגוון בעיות אורתופדיות ונוירולוגיות.</p>
         </div>
       </section>
@@ -83,17 +83,26 @@ function App() {
       </section>
       <section id="contact" className="contact">
         <h2>צור קשר</h2>
-        <form action="mailto:galit@example.com" method="post" encType="text/plain">
-          <label>שם:<br/><input type="text" name="name" required /></label><br/>
-          <label>אימייל:<br/><input type="email" name="email" required /></label><br/>
-          <label>הודעה:<br/><textarea name="message" required /></label><br/>
+        <form className="contact-form" action="mailto:galit@example.com" method="post" encType="text/plain">
+          <label className="contact-label">שם:<br/><input className="contact-input" type="text" name="name" required /></label><br/>
+          <label className="contact-label">אימייל:<br/><input className="contact-input" type="email" name="email" required /></label><br/>
+          <label className="contact-label">הודעה:<br/><textarea className="contact-input" name="message" required /></label><br/>
           <button type="submit">שלח</button>
         </form>
-        <p>או <a href="https://wa.me/972501234567" target="_blank" rel="noopener noreferrer">שלח הודעה בוואטסאפ</a></p>
+        <p style={{display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 16}}>
+          <a href="https://wa.me/972501234567" target="_blank" rel="noopener noreferrer" style={{display: 'flex', alignItems: 'center', gap: 6}}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="16" fill="#25D366"/><path d="M23.472 19.339c-.355-.177-2.104-1.037-2.43-1.155-.326-.118-.563-.177-.8.178-.237.355-.91 1.155-1.117 1.392-.207.237-.414.266-.769.089-.355-.178-1.5-.553-2.86-1.763-1.057-.943-1.771-2.104-1.98-2.459-.207-.355-.022-.546.155-.723.159-.158.355-.414.533-.62.178-.207.237-.355.355-.592.118-.237.06-.444-.03-.622-.089-.178-.8-1.921-1.096-2.633-.289-.695-.583-.601-.8-.612-.207-.009-.444-.011-.681-.011-.237 0-.622.089-.949.444-.326.355-1.243 1.215-1.243 2.963 0 1.748 1.274 3.437 1.452 3.674.178.237 2.51 3.833 6.077 5.225.85.292 1.513.466 2.03.596.853.204 1.63.175 2.243.106.684-.076 2.104-.859 2.403-1.689.296-.83.296-1.541.207-1.689-.089-.148-.326-.237-.681-.414z" fill="#fff"/></svg>
+            שלח הודעה בוואטסאפ
+          </a>
+          <a href="https://www.facebook.com/galit.pr" target="_blank" rel="noopener noreferrer" style={{display: 'flex', alignItems: 'center', gap: 6}}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="16" fill="#1877F3"/><path d="M21.5 16.02h-3.02v8.48h-3.5v-8.48h-1.75v-2.98h1.75v-1.7c0-2.1 1.02-3.2 3.23-3.2h2.02v2.98h-1.26c-.38 0-.5.18-.5.5v1.42h2.01l-.27 2.98z" fill="#fff"/></svg>
+            פייסבוק
+          </a>
+        </p>
         <div className="map">
           <iframe
             title="map"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3381.123456789!2d34.935!3d32.266!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151d3f123456789:0xabcdef123456789!2z15nXkdeR15XXlNeZ15nXkQ!5e0!3m2!1siw!2sil!4v1710000000000!5m2!1siw!2sil"
+            src="https://www.google.com/maps?q=עמק+יזרעאל+קדימה+צורן&output=embed"
             width="100%"
             height="200"
             style={{ border: 0 }}
@@ -104,8 +113,10 @@ function App() {
         </div>
       </section>
       <footer className="footer">
-        <img src={logo} alt="לוגו גלית ריכטר" style={{ height: 40, margin: '0 1rem' }} />
-        <p>© {new Date().getFullYear()} גלית ריכטר | קדימה צורן</p>
+        <div className="footer-row">
+          <img src={logo} alt="לוגו גלית ריכטר" style={{ height: 40, margin: '0 1rem' }} />
+          <p style={{margin: 0}}>גלית ריכטר | קדימה צורן <span style={{marginRight: '0.5em', fontWeight: 700}}>2025 ©</span></p>
+        </div>
         <p>טלפון: <a href="tel:0501234567">050-1234567</a></p>
       </footer>
     </div>
