@@ -1,4 +1,10 @@
+import './App.css'
 import { useState } from 'react'
+import logo from '../public/assets/Taliayaniv_logo.png'
+import heroImg from '../public/assets/clinicback2_edited.jpg'
+import aboutImg from '../public/assets/85f255_51f2688bcdd445bc9072ebac0bea5cd4~mv2.jpg'
+import leavesImg from '../public/assets/Leaves.png'
+import testimonialImg from '../public/assets/f9b9d0b90d514da8b7f6d3cc07218673.png'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -6,6 +12,7 @@ function App() {
   return (
     <div className="App" style={{ direction: 'rtl', fontFamily: 'inherit' }}>
       <nav className="navbar">
+        <img src={logo} alt="לוגו גלית ריכטר" style={{ height: 60, margin: '0 1rem' }} />
         <ul>
           <li><a href="#hero">בית</a></li>
           <li><a href="#about">אודות</a></li>
@@ -14,26 +21,62 @@ function App() {
           <li><a href="#contact">צור קשר</a></li>
         </ul>
       </nav>
-      <section id="hero" className="hero">
+      <section
+        id="hero"
+        className="hero"
+        style={{
+          position: 'relative',
+          textAlign: 'center',
+          backgroundImage: `url(${heroImg})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          minHeight: '320px',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          color: '#2a5d7c',
+        }}
+      >
         <h1>גלית ריכטר - פיזיותרפיסטית</h1>
-        <h2>קליניקה בקדימה צורן</h2>
-        <p>ברוכים הבאים לקליניקה החדשה לפיזיותרפיה</p>
+        <h2 className="hero-subtitle">קליניקה בקדימה צורן</h2>
+        <p className="hero-desc">ברוכים הבאים לקליניקה החדשה לפיזיותרפיה</p>
       </section>
-      <section id="about" className="about">
-        <h2>אודות</h2>
-        <p>גלית ריכטר, פיזיותרפיסטית מוסמכת עם ניסיון רב בטיפול במגוון בעיות אורתופדיות ונוירולוגיות.</p>
+      <section id="about" className="about" style={{ display: 'flex', alignItems: 'center', gap: 24 }}>
+        <img src={aboutImg} alt="גלית ריכטר" style={{ width: 120, height: 120, borderRadius: '50%', objectFit: 'cover', marginLeft: 24 }} />
+        <div>
+          <h2>אודות</h2>
+          <p>גלית ריכטר, פיזיותרפיסטית מוסמכת עם ניסיון רב בטיפול במגוון בעיות אורתופדיות ונוירולוגיות.</p>
+        </div>
       </section>
       <section id="services" className="services">
         <h2>שירותים</h2>
-        <ul>
-          <li>פיזיותרפיה אורתופדית</li>
-          <li>שיקום לאחר ניתוח</li>
-          <li>טיפול בכאבי גב וצוואר</li>
-          <li>פיזיותרפיה נוירולוגית</li>
-          <li>ייעוץ והכוונה אישית</li>
-        </ul>
+        <img src={leavesImg} alt="עלים דקורטיביים" className="leaves-img" />
+        <div className="services-list">
+          <div className="service-block">
+            <h3>פיזיותרפיה אורתופדית</h3>
+            <p>טיפול במגוון בעיות שריר-שלד, פציעות ספורט, שיקום מפרקים ושרירים.</p>
+          </div>
+          <div className="service-block">
+            <h3>שיקום לאחר ניתוח</h3>
+            <p>ליווי מקצועי בתהליך ההחלמה לאחר ניתוחים אורתופדיים ונוירולוגיים.</p>
+          </div>
+          <div className="service-block">
+            <h3>טיפול בכאבי גב וצוואר</h3>
+            <p>התאמת תוכנית טיפול אישית להקלה על כאבים ושיפור התפקוד היומיומי.</p>
+          </div>
+          <div className="service-block">
+            <h3>פיזיותרפיה נוירולוגית</h3>
+            <p>שיקום תפקודי לאחר פגיעות עצביות, שבץ מוחי ומחלות נוירולוגיות.</p>
+          </div>
+          <div className="service-block">
+            <h3>ייעוץ והכוונה אישית</h3>
+            <p>הדרכה מקצועית, מענה לשאלות ובניית תוכנית טיפול מותאמת אישית.</p>
+          </div>
+        </div>
       </section>
-      <section id="testimonials" className="testimonials">
+      <section id="testimonials" className="testimonials" style={{ background: `url(${testimonialImg}) no-repeat center/cover`, borderRadius: 12, padding: 24 }}>
         <h2>המלצות</h2>
         <blockquote>"גלית מקצועית, קשובה ומסורה. ממליצה בחום!"</blockquote>
         <blockquote>"הטיפול עזר לי מאוד, תודה רבה!"</blockquote>
@@ -61,6 +104,7 @@ function App() {
         </div>
       </section>
       <footer className="footer">
+        <img src={logo} alt="לוגו גלית ריכטר" style={{ height: 40, margin: '0 1rem' }} />
         <p>© {new Date().getFullYear()} גלית ריכטר | קדימה צורן</p>
         <p>טלפון: <a href="tel:0501234567">050-1234567</a></p>
       </footer>
