@@ -7,6 +7,7 @@ import recommendation1 from '../../public/assets/recommendation1.jpg'
 import recommendation2 from '../../public/assets/recommendation2.jpg'
 import recommendation3 from '../../public/assets/recommendation3.jpg'
 import recommendation4 from '../../public/assets/recommendation4.jpg'
+import fullLogo from '../../public/assets/fulllogo.jpg'
 
 function MainPage() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
@@ -202,8 +203,8 @@ function MainPage() {
               <li>שימוש במכשור מתקדם כגון <strong>משקפי פרנזל</strong>
                 {vestibularTechniquesExpanded && (
                   <>
-                    {vestibularTechniques.slice(1).map((item, index) => (
-                      <span key={index + 1}> {item}</span>
+                    {vestibularTechniques.map((item, index) => (
+                      <span key={index}> {item}</span>
                     ))}
                   </>
                 )}
@@ -260,26 +261,39 @@ function MainPage() {
       {/* Contact Section */}
       <section id="contact" className="contact">
         <h2>צור קשר</h2>
-        <form className="contact-form" action="mailto:galit@example.com" method="post" encType="text/plain">
+        <form className="contact-form" action="mailto:galitush1@gmail.com" method="post" encType="text/plain">
           <input type="text" name="name" placeholder="שם מלא" required />
           <input type="email" name="email" placeholder="אימייל" required />
           <textarea name="message" placeholder="הודעה" required></textarea>
           <button type="submit">שלח הודעה</button>
         </form>
         
-        <div className="contact-info">
-          <a href="tel:+972526598076" className="contact-link">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
-              <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" fill="#2E7D32"/>
-            </svg>
-            התקשר עכשיו
+        <div className="contact-info redesigned-contact-info">
+          <a href="tel:+972526598076" className="contact-card call-card" aria-label="טלפון">
+            <span className="contact-label">טלפון</span>
+            <span className="contact-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none">
+                <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" fill="#fff"/>
+              </svg>
+            </span>
           </a>
-          <a href="https://wa.me/972526598076" target="_blank" rel="noopener noreferrer" className="contact-link">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 32 32" fill="none">
-              <circle cx="16" cy="16" r="16" fill="#25D366"/>
-              <path d="M23.472 19.339c-.355-.177-2.104-1.037-2.43-1.155-.326-.118-.563-.177-.8.178-.237.355-.91 1.155-1.117 1.392-.207.237-.414.266-.769.089-.355-.178-1.5-.553-2.86-1.763-1.057-.943-1.771-2.104-1.98-2.459-.207-.355-.022-.546.155-.723.159-.158.355-.414.533-.62.178-.207.237-.355.355-.592.118-.237.06-.444-.03-.622-.089-.178-.8-1.921-1.096-2.633-.289-.695-.583-.601-.8-.612-.207-.009-.444-.011-.681-.011-.237 0-.622.089-.949.444-.326.355-1.243 1.215-1.243 2.963 0 1.748 1.274 3.437 1.452 3.674.178.237 2.51 3.833 6.077 5.225.85.292 1.513.466 2.03.596.853.204 1.63.175 2.243.106.684-.076 2.104-.859 2.403-1.689.296-.83.296-1.541.207-1.689-.089-.148-.326-.237-.681-.414z" fill="#fff"/>
-            </svg>
-            שלח הודעה בוואטסאפ
+          <a href="https://wa.me/972526598076" target="_blank" rel="noopener noreferrer" className="contact-card whatsapp-card" aria-label="Whatsapp">
+            <span className="contact-label">Whatsapp</span>
+            <span className="contact-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 32 32" fill="none">
+                <circle cx="16" cy="16" r="16" fill="#25D366"/>
+                <path d="M23.472 19.339c-.355-.177-2.104-1.037-2.43-1.155-.326-.118-.563-.177-.8.178-.237.355-.91 1.155-1.117 1.392-.207.237-.414.266-.769.089-.355-.178-1.5-.553-2.86-1.763-1.057-.943-1.771-2.104-1.98-2.459-.207-.355-.022-.546.155-.723.159-.158.355-.414.533-.62.178-.207.237-.355.355-.592.118-.237.06-.444-.03-.622-.089-.178-.8-1.921-1.096-2.633-.289-.695-.583-.601-.8-.612-.207-.009-.444-.011-.681-.011-.237 0-.622.089-.949.444-.326.355-1.243 1.215-1.243 2.963 0 1.748 1.274 3.437 1.452 3.674.178.237 2.51 3.833 6.077 5.225.85.292 1.513.466 2.03.596.853.204 1.63.175 2.243.106.684-.076 2.104-.859 2.403-1.689.296-.83.296-1.541.207-1.689-.089-.148-.326-.237-.681-.414z" fill="#fff"/>
+              </svg>
+            </span>
+          </a>
+          <a href="https://www.facebook.com/profile.php?id=61578053394490" target="_blank" rel="noopener noreferrer" className="contact-card facebook-card" aria-label="פייסבוק">
+            <span className="contact-label">פייסבוק</span>
+            <span className="contact-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 32 32" fill="none">
+                <circle cx="16" cy="16" r="16" fill="#fff"/>
+                <path d="M18.5 10.5h2V7.5c-.35-.05-1.55-.15-2.95-.15-2.92 0-4.55 1.8-4.55 5.1v2.05H9.5v3.1h3.5V24h4.1v-6.4h2.75l.4-3.1h-3.15v-1.6c0-.9.25-1.5 1.5-1.5z" fill="#1877F3"/>
+              </svg>
+            </span>
           </a>
         </div>
 
@@ -300,12 +314,19 @@ function MainPage() {
       {/* Footer */}
       <footer className="footer">
         <div className="footer-content">
-          <div className="footer-brand">
-            <div className="brand-name">גלית ריכטר</div>
-            <div className="brand-subtitle">פיזיותרפיה</div>
+          <div className="footer-brand" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '20px' }}>
+            <img src={fullLogo} alt="גלית ריכטר לוגו" style={{ height: '68px', objectFit: 'contain' }} />
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+              <div className="brand-name">גלית ריכטר</div>
+              <div className="brand-subtitle" style={{ fontSize: '1.3rem', fontWeight: 'bold' }}>פיזיותרפיה</div>
+            </div>
           </div>
-          <p>קדימה צורן | 2025 ©</p>
-          <p>טלפון: <a href="tel:+972526598076">052-6598076</a></p>
+          <div style={{ textAlign: 'center', marginTop: 0, marginBottom: 0, fontSize: '1rem', lineHeight: 1 }}>
+            עמק יזרעאל 14, קדימה | 2025 ©
+          </div>
+          <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px'}}>
+            <span><a href="tel:+972526598076">052-6598076</a></span>
+          </div>
         </div>
       </footer>
     </>
