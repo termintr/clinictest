@@ -71,7 +71,7 @@ function ProfessionalInfo() {
     {
       id: 'vestibular-6',
       question: 'דף מידע על תת פעילות המערכת הוסטיבולרית',
-      answer: 'redirect:/clinictest/assets/vastibular-rehab.pdf'
+      answer: 'redirect:./assets/vastibular-rehab.pdf'
     }
   ]
 

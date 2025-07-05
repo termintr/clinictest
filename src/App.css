@@ -867,6 +867,82 @@ section.contact h2,
   fill: #1877F3;
 }
 
+/* Prevent visited link styling from affecting contact cards */
+.contact-card:visited,
+.call-card:visited,
+.whatsapp-card:visited,
+.facebook-card:visited {
+  background: inherit !important;
+  color: #fff !important;
+}
+
+.contact-card:active,
+.call-card:active,
+.whatsapp-card:active,
+.facebook-card:active {
+  background: inherit !important;
+  color: #fff !important;
+}
+
+/* Ensure contact cards maintain their specific backgrounds */
+.call-card:visited,
+.call-card:active {
+  background: linear-gradient(135deg, #7c3aed 0%, #a78bfa 100%) !important;
+}
+
+.whatsapp-card:visited,
+.whatsapp-card:active {
+  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%) !important;
+}
+
+.facebook-card:visited,
+.facebook-card:active {
+  background: linear-gradient(135deg, #1877F3 0%, #4267B2 100%) !important;
+}
+
+/* Additional comprehensive overrides for all states */
+.contact-card,
+.contact-card:link,
+.contact-card:visited,
+.contact-card:hover,
+.contact-card:active,
+.contact-card:focus {
+  text-decoration: none !important;
+}
+
+.call-card,
+.call-card:link,
+.call-card:visited,
+.call-card:hover,
+.call-card:active,
+.call-card:focus {
+  background: linear-gradient(135deg, #7c3aed 0%, #a78bfa 100%) !important;
+  color: #fff !important;
+  text-decoration: none !important;
+}
+
+.whatsapp-card,
+.whatsapp-card:link,
+.whatsapp-card:visited,
+.whatsapp-card:hover,
+.whatsapp-card:active,
+.whatsapp-card:focus {
+  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%) !important;
+  color: #fff !important;
+  text-decoration: none !important;
+}
+
+.facebook-card,
+.facebook-card:link,
+.facebook-card:visited,
+.facebook-card:hover,
+.facebook-card:active,
+.facebook-card:focus {
+  background: linear-gradient(135deg, #1877F3 0%, #4267B2 100%) !important;
+  color: #fff !important;
+  text-decoration: none !important;
+}
+
 .contact-subtext {
   font-size: 0.98rem;
   font-weight: 400;
