@@ -4,19 +4,8 @@
     <meta charset="utf-8">
     <title>Redirecting...</title>
     <script>
-        // Get the current path
-        const path = window.location.pathname;
-        
-        // Remove the base path if it exists
-        const basePath = '/';
-        const cleanPath = path.startsWith(basePath) ? path.substring(basePath.length) : path;
-        
-        // Redirect to the main page with the path as a hash
-        if (cleanPath !== '/' && cleanPath !== '') {
-            window.location.href = basePath + '/#' + cleanPath;
-        } else {
-            window.location.href = basePath + '/';
-        }
+        // Immediately redirect to home page
+        window.location.replace('/');
     </script>
 </head>
 <body>
