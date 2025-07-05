@@ -8,6 +8,30 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Gveret+Levin:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <title>Gali Richtr - Physiotherapist</title>
+    <script>
+      // Force scroll to top on page load
+      window.addEventListener('load', function() {
+        setTimeout(function() {
+          window.scrollTo(0, 0);
+        }, 0);
+      });
+      
+      // Also try on DOMContentLoaded
+      document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(function() {
+          window.scrollTo(0, 0);
+        }, 0);
+      });
+      
+      // And immediately
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function() {
+          window.scrollTo(0, 0);
+        });
+      } else {
+        window.scrollTo(0, 0);
+      }
+    </script>
     <script type="module" crossorigin src="/clinictest/assets/index-DIwLVE6M.js"></script>
     <link rel="stylesheet" crossorigin href="/clinictest/assets/index-B0bxZsNs.css">
   </head>
