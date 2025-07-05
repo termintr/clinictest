@@ -7,6 +7,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Gveret+Levin&display=swap" rel="stylesheet">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Gveret+Levin&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Gveret+Levin&display=swap" rel="stylesheet"></noscript>
     <title>Galit Richter - Physiotherapist</title>
     <style>
       html, body {
@@ -46,9 +48,27 @@
       
       // Handle back/forward navigation
       window.addEventListener('popstate', forceScrollToTop);
+      
+      // Force font loading for mobile Safari
+      if ('fonts' in document) {
+        document.fonts.ready.then(function() {
+          console.log('Fonts loaded successfully');
+        });
+      }
+      
+      // Force font loading with timeout for mobile Safari
+      setTimeout(function() {
+        if (document.fonts && document.fonts.check) {
+          document.fonts.load('1em Gveret Levin').then(function() {
+            console.log('Gveret Levin font loaded');
+            // Force reflow to apply fonts
+            document.body.style.fontFamily = document.body.style.fontFamily;
+          });
+        }
+      }, 100);
     </script>
-    <script type="module" crossorigin src="/galitphysioclinic/assets/index-DaFAe7vb.js"></script>
-    <link rel="stylesheet" crossorigin href="/galitphysioclinic/assets/index-B6mktlpR.css">
+    <script type="module" crossorigin src="/galitphysioclinic/assets/index-C1n-XARY.js"></script>
+    <link rel="stylesheet" crossorigin href="/galitphysioclinic/assets/index-S-BSf2aL.css">
   </head>
   <body>
     <div id="root"></div>
