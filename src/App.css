@@ -632,9 +632,12 @@ section.contact h2,
 
 /* Recommendations Carousel Section */
 .testimonials {
-  background: linear-gradient(135deg, var(--background-light) 0%, #E9D8FD 100%);
+  background: transparent;
   padding: 5px 0;
   text-align: center;
+  margin: 0;
+  border-radius: 0;
+  box-shadow: none;
 }
 
 .recommendation-carousel {
@@ -875,7 +878,7 @@ section.contact h2,
 .footer {
   background: linear-gradient(135deg, #C4B5FD 0%, #A78BFA 100%);
   color: white;
-  padding: 30px 20px;
+  padding: 30px 20px 80px 20px;
   text-align: center;
   margin-top: 0px;
 }
@@ -927,9 +930,19 @@ section.contact h2,
   }
   
   .about-content {
-    flex-direction: row;
+    flex-direction: column;
     text-align: right;
     gap: 30px;
+    align-items: center;
+    justify-content: center;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  
+  .about-content p {
+    text-align: right;
+    max-width: 600px;
+    margin: 0;
   }
   
   .about-content img {
@@ -938,9 +951,14 @@ section.contact h2,
   }
   
   .footer-content {
-    flex-direction: row;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
+    text-align: center;
+    gap: 10px;
+  }
+  
+  .footer-brand {
+    margin-bottom: 10px;
   }
 
   .menu-content {
@@ -959,7 +977,7 @@ section.contact h2,
 
 @media (min-width: 1024px) {
   .services-grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
   }
   
   .hero {
