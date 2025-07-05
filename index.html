@@ -8,32 +8,47 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Gveret+Levin:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <title>Gali Richtr - Physiotherapist</title>
-    <script>
-      // Force scroll to top on page load
-      window.addEventListener('load', function() {
-        setTimeout(function() {
-          window.scrollTo(0, 0);
-        }, 0);
-      });
-      
-      // Also try on DOMContentLoaded
-      document.addEventListener('DOMContentLoaded', function() {
-        setTimeout(function() {
-          window.scrollTo(0, 0);
-        }, 0);
-      });
-      
-      // And immediately
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', function() {
-          window.scrollTo(0, 0);
-        });
-      } else {
-        window.scrollTo(0, 0);
+    <style>
+      html, body {
+        scroll-behavior: auto !important;
       }
+    </style>
+    <script>
+      // Aggressive scroll to top for mobile
+      function forceScrollToTop() {
+        // Try multiple methods
+        window.scrollTo(0, 0);
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
+        
+        // Force scroll after a short delay
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          document.documentElement.scrollTop = 0;
+          document.body.scrollTop = 0;
+        }, 10);
+        
+        // And after a longer delay
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          document.documentElement.scrollTop = 0;
+          document.body.scrollTop = 0;
+        }, 100);
+      }
+      
+      // Run immediately
+      forceScrollToTop();
+      
+      // Run on various events
+      window.addEventListener('load', forceScrollToTop);
+      document.addEventListener('DOMContentLoaded', forceScrollToTop);
+      window.addEventListener('pageshow', forceScrollToTop);
+      
+      // Handle back/forward navigation
+      window.addEventListener('popstate', forceScrollToTop);
     </script>
-    <script type="module" crossorigin src="/clinictest/assets/index-DIwLVE6M.js"></script>
-    <link rel="stylesheet" crossorigin href="/clinictest/assets/index-B0bxZsNs.css">
+    <script type="module" crossorigin src="/clinictest/assets/index-UM-NaI_r.js"></script>
+    <link rel="stylesheet" crossorigin href="/clinictest/assets/index-fT34QcfB.css">
   </head>
   <body>
     <div id="root"></div>
