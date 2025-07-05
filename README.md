@@ -1,6 +1,8 @@
-# React + TypeScript + Vite
+# Galit Physio Clinic
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A professional website for Galit Physio Clinic, built with React + TypeScript + Vite.
+
+This website provides information about physiotherapy services, treatment techniques, and contact information for the clinic.
 
 Currently, two official plugins are available:
 

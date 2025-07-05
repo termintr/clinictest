@@ -99,7 +99,6 @@ function ProfessionalInfo() {
         <div 
           className="faq-question" 
           onClick={handleClick}
-          style={{ cursor: 'pointer', fontWeight: 'bold', padding: '4px 8px', borderBottom: '1px solid #e2e8f0', fontSize: '1.4rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', outline: 'none' }}
         >
           <span>{faq.question}</span>
           {!isRedirect && (
@@ -119,7 +118,6 @@ function ProfessionalInfo() {
         {!isRedirect && expandedItems[faq.id] && (
           <div 
             className="faq-answer" 
-            style={{ padding: '6px 8px', backgroundColor: '#f7fafc', whiteSpace: 'pre-line', fontSize: '1.2rem', lineHeight: '1.4' }}
             dangerouslySetInnerHTML={{ __html: faq.answer }}
           />
         )}
@@ -134,17 +132,17 @@ function ProfessionalInfo() {
       
       {/* Professional Information Section */}
       <section id="professional-info" className="professional-info">
-        <h2 style={{ marginBottom: '20px' }}>מידע מקצועי</h2>
+        <h2>מידע מקצועי</h2>
         
         <div className="faq-section" id="pelvic-floor">
-          <h3 style={{ fontSize: '1.4rem', marginBottom: '8px', fontWeight: 'bold' }}>בתחום רצפת האגן:</h3>
+          <h3>בתחום רצפת האגן:</h3>
           <div className="faq-list">
             {pelvicFloorFAQs.map(renderFAQItem)}
           </div>
         </div>
 
         <div className="faq-section" id="vestibular">
-          <h3 style={{ fontSize: '1.4rem', marginBottom: '8px', fontWeight: 'bold' }}>בתחום הוסטיבולרי:</h3>
+          <h3>בתחום הוסטיבולרי:</h3>
           <div className="faq-list">
             {vestibularFAQs.map(renderFAQItem)}
           </div>
