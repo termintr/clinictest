@@ -8,6 +8,45 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Gveret+Levin:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <title>Gali Richtr - Physiotherapist</title>
+    <style>
+      html, body {
+        scroll-behavior: auto !important;
+      }
+    </style>
+    <script>
+      // Aggressive scroll to top for mobile
+      function forceScrollToTop() {
+        // Try multiple methods
+        window.scrollTo(0, 0);
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
+        
+        // Force scroll after a short delay
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          document.documentElement.scrollTop = 0;
+          document.body.scrollTop = 0;
+        }, 10);
+        
+        // And after a longer delay
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          document.documentElement.scrollTop = 0;
+          document.body.scrollTop = 0;
+        }, 100);
+      }
+      
+      // Run immediately
+      forceScrollToTop();
+      
+      // Run on various events
+      window.addEventListener('load', forceScrollToTop);
+      document.addEventListener('DOMContentLoaded', forceScrollToTop);
+      window.addEventListener('pageshow', forceScrollToTop);
+      
+      // Handle back/forward navigation
+      window.addEventListener('popstate', forceScrollToTop);
+    </script>
   </head>
   <body>
     <div id="root"></div>

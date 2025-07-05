@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import emailjs from '@emailjs/browser'
 import carouselMain from '../../public/assets/carouselMain.jpg'
 import carousel1 from '../../public/assets/carousel1.jpg'
 import carousel2 from '../../public/assets/carousel2.jpg'
@@ -7,7 +8,9 @@ import recommendation1 from '../../public/assets/recommendation1.jpg'
 import recommendation2 from '../../public/assets/recommendation2.jpg'
 import recommendation3 from '../../public/assets/recommendation3.jpg'
 import recommendation4 from '../../public/assets/recommendation4.jpg'
-import fullLogo from '../../public/assets/fulllogo.jpg'
+import recommendation5 from '../../public/assets/recommendation5.jpeg'
+import fullLogo from '../../public/assets/fulllogo.png'
+import Footer from './Footer'
 
 function MainPage() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
@@ -17,9 +20,22 @@ function MainPage() {
   const [vestibularTechniquesExpanded, setVestibularTechniquesExpanded] = useState(false)
   const [recommendationIndex, setRecommendationIndex] = useState(0)
   const [isCarouselPaused, setIsCarouselPaused] = useState(false)
+  
+  // Contact form state
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  })
+  const [errors, setErrors] = useState({
+    name: '',
+    email: '',
+    message: ''
+  })
+  const [showSuccessPopup, setShowSuccessPopup] = useState(false)
 
   const carouselImages = [carouselMain, carousel1, carousel2]
-  const recommendationImages = [recommendation1, recommendation2, recommendation3, recommendation4]
+  const recommendationImages = [recommendation1, recommendation2, recommendation3, recommendation4, recommendation5]
 
   const pelvicFloorItems = [
     "כאבים ביחסים",
@@ -41,19 +57,18 @@ function MainPage() {
   ]
 
   const pelvicFloorTechniques = [
-    "טיפול מנואלי (ידני) חיצוני ופנימי לתנועתיות, שחרור רקמות ומתח שרירים.",
-    "ביופידבק - מכשיר המלמד לזהות ולשלוט בשרירי רצפת האגן בעזרת משוב חזותי וקולי ע״י אלקטרודה וגינלית המתחברת למכשיר ובכך המטופלת מצליחה לשפר את התפקוד ויכולת השליטה על הסוגרים.",
-    "חיזוק שרירי רצפת האגן והשרירים התומכים בה ע״י תרגילים ממוקדים תוך עבודה נכונה ומותאמת אישית כולל התייחסות לנשימה ומנחים מגוונים.",
-    "טיפול ויסצרלי - גישה טיפולית ידנית המתמקדת בתנועתיות של האיברים הפנימיים (ויסצרה) בגוף. מטרת הטיפול היא לשפר מתח מוגבר בקיר הבטן, לשפר תנועתיות מעיים, לשחרר איזור גב עליון וסרעפת ובכך לתרום לשיפור פונקציונלי של מערכת העיכול.",
-    "שימוש במנשפית (שיטת גיארם) - שיטה לתרגול שרירי הבטן ורצפת האגן ע\"י נשיפה לתוך מנשפית (אביזר דמוי משרוקית). הנשיפה מכריחה את שרירי הבטן ורצפת האגן לעבוד בצורה הפיזיולוגית שלהם כשרירים של מערכת היציבה המגינים על הגו ומייצבים את מרכז הגוף ובו זמנית תורמת לחיזוקם.",
-    "הדרכה וליווי לאורך כל התהליך."
+    "<strong>טיפול מנואלי</strong> (ידני) חיצוני ופנימי לתנועתיות, שחרור רקמות ומתח שרירים.",
+    "<strong>ביופידבק</strong> - מכשיר המלמד לזהות ולשלוט בשרירי רצפת האגן בעזרת משוב חזותי וקולי ע״י אלקטרודה וגינלית המתחברת למכשיר ובכך המטופלת מצליחה לשפר את התפקוד ויכולת השליטה על הסוגרים.",
+    "<strong>חיזוק שרירי רצפת האגן</strong> והשרירים התומכים בה ע״י תרגילים ממוקדים תוך עבודה נכונה ומותאמת אישית כולל התייחסות לנשימה ומנחים מגוונים.",
+    "<strong>טיפול ויסצרלי</strong> - גישה טיפולית ידנית המתמקדת בתנועתיות של האיברים הפנימיים (ויסצרה) בגוף. מטרת הטיפול היא לשפר מתח מוגבר בקיר הבטן, לשפר תנועתיות מעיים, לשחרר איזור גב עליון וסרעפת ובכך לתרום לשיפור פונקציונלי של מערכת העיכול.",
+    "<strong>שימוש במנשפית (שיטת גיארם)</strong> - שיטה לתרגול שרירי הבטן ורצפת האגן ע\"י נשיפה לתוך מנשפית (אביזר דמוי משרוקית). הנשיפה מכריחה את שרירי הבטן ורצפת האגן לעבוד בצורה הפיזיולוגית שלהם כשרירים של מערכת היציבה המגינים על הגו ומייצבים את מרכז הגוף ובו זמנית תורמת לחיזוקם.",
+    "<strong>הדרכה וליווי</strong> צמוד לאורך כל התהליך."
   ]
 
   const vestibularTechniques = [
-    "שימוש במכשור מתקדם כגון משקפי פרנזל",
-    "שעוזרים לאבחון מדויק וטיפול מותאם לבעיה.",
-    "שימוש בתרגילים ייעודיים ומותאמים אישית לאיזון המערכת הוסטיבולרית, כולל דפי תרגול ומעקב כנדרש.",
-    "ליווי אישי ומקצועי לאורך כל התהליך עד להגעה למטרות הטיפוליות שקבענו."
+    "<strong>שימוש במכשור</strong> מתקדם כגון משקפי פרנזל שעוזרים לאבחון מדויק וטיפול מותאם לבעיה.",
+    "<strong>שימוש בתרגילים</strong> ייעודיים ומותאמים אישית לאיזון המערכת הוסטיבולרית, כולל דפי תרגול ומעקב כנדרש.",
+    "<strong>ליווי אישי</strong> ומקצועי לאורך כל התהליך עד להגעה למטרות הטיפוליות שקבענו."
   ]
 
   useEffect(() => {
@@ -87,6 +102,89 @@ function MainPage() {
     setTimeout(() => setIsCarouselPaused(false), 5000)
   }
 
+  // Email validation function
+  const validateEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    return emailRegex.test(email)
+  }
+
+  // Handle form input changes
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }))
+    
+    // Clear errors when user starts typing
+    if (errors[name as keyof typeof errors]) {
+      setErrors(prev => ({
+        ...prev,
+        [name]: ''
+      }))
+    }
+  }
+
+  // Handle form submission
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    
+    // Validate name
+    if (!formData.name.trim()) {
+      setErrors(prev => ({ ...prev, name: 'שדה חובה' }))
+      return
+    }
+    
+    // Validate email
+    if (!formData.email) {
+      setErrors(prev => ({ ...prev, email: 'שדה חובה' }))
+      return
+    }
+    if (!validateEmail(formData.email)) {
+      setErrors(prev => ({ ...prev, email: 'אימייל אינו תקין' }))
+      return
+    }
+    
+    // Validate message
+    if (!formData.message.trim()) {
+      setErrors(prev => ({ ...prev, message: 'שדה חובה' }))
+      return
+    }
+    
+    // Clear errors
+    setErrors({ name: '', email: '', message: '' })
+    
+    // Prepare email template parameters
+    const templateParams = {
+      from_name: formData.name,
+      from_email: formData.email,
+      message: formData.message,
+      to_email: 'galitush1@gmail.com'
+    }
+    
+    // Send email using EmailJS
+    emailjs.send(
+      'service_galitclinic', // Replace with your EmailJS service ID
+      'template_contact_clinic', // Replace with your EmailJS template ID
+      templateParams,
+      '0SNKk5cvEsXIiQtfF' // Replace with your EmailJS public key
+    )
+    .then((response) => {
+      console.log('SUCCESS!', response.status, response.text)
+      // Show success popup
+      setShowSuccessPopup(true)
+      // Reset form
+      setFormData({ name: '', email: '', message: '' })
+      // Hide popup after 3 seconds
+      setTimeout(() => setShowSuccessPopup(false), 3000)
+    })
+    .catch((error) => {
+      console.log('FAILED...', error)
+      // Show error message (you can add error state if needed)
+      alert('שגיאה בשליחת האימייל. אנא נסה שוב.')
+    })
+  }
+
   return (
     <>
       {/* Hero Carousel */}
@@ -115,14 +213,14 @@ function MainPage() {
         <h2>מי אני</h2>
         <div className="about-content">
           <img src={aboutImg} alt="גלית ריכטר" />
-          <p>אמא ל-3 ושחקנית כדורשת בנשמה 😊<br/><br/>
+          <p>אמא ל-3 ושחקנית כדורשת בנשמה 😊<br/>
           פיזיותרפיסטית מוסמכת בוגרת אוניברסיטת ת״א משנת 2006 ומנהלת מכון פיזיותרפיה בכללית, מדריכה קלינית ומטפלת גם במגוון הבעיות האורטופדיות למיניהן.<br/><br/>
           עיקר האהבות שלי בעבודה מתרכזות בשני תחומים שונים בהם התמחיתי:<br/><br/>
           <span className="numbered-list">
           1. <strong>רצפת האגן הנשית</strong> - אני משתמשת בטכניקות מתקדמות ומתעדכנת כל הזמן בפיתוחים הקיימים בתחום. מביאה לטיפול את הרוגע שלי, יצירת סביבה בטוחה ונעימה למטופלת ומתאימה כמו חליפה לכל אחת את הטיפול בשבילה.<br/><br/>
           2. <strong>סחרחורות</strong> - תחום מאוד מבלבל ומצריך ידע עמוק כדי לפתור בעיות מורכבות, לא כל הסחרחורות הן ״קריסטלים״ שזזים באוזן וכאן נכנס תחום השיקום הוסטיבולרי המרתק שבו גם למדתי לטפל ולעזור.<br/><br/>
           </span>
-          <span className="highlighted-text">
+          <span className="highlighted-text" style={{ fontSize: '1.4rem' }}>
           מטופלים שנכנסים לטיפול עם חשש ופחד, תמיד יוצאים עם אותו המשפט -״זה בכלל לא נורא כמו שחשבתי״.<br/><br/>
           </span>
           אני רואה בעבודתי שליחות ומזל גדול שיש לי הזכות לעסוק במה שאני אוהבת לעשות, ובו זמנית לשפר איכות חיים לאנשים רבים.</p>
@@ -182,11 +280,11 @@ function MainPage() {
             <h3>בתחום רצפת האגן:</h3>
             <ul>
               {pelvicFloorTechniques.slice(0, 1).map((item, index) => (
-                <li key={index}>{item}</li>
+                <li key={index} dangerouslySetInnerHTML={{ __html: item }}></li>
               ))}
               {pelvicFloorTechniquesExpanded && 
                 pelvicFloorTechniques.slice(1).map((item, index) => (
-                  <li key={index + 1}>{item}</li>
+                  <li key={index + 1} dangerouslySetInnerHTML={{ __html: item }}></li>
                 ))
               }
             </ul>
@@ -200,15 +298,14 @@ function MainPage() {
           <div className="service-card">
             <h3>בתחום הוסטיבולרי:</h3>
             <ul>
-              <li>שימוש במכשור מתקדם כגון <strong>משקפי פרנזל</strong>
-                {vestibularTechniquesExpanded && (
-                  <>
-                    {vestibularTechniques.map((item, index) => (
-                      <span key={index}> {item}</span>
-                    ))}
-                  </>
-                )}
-              </li>
+              {vestibularTechniques.slice(0, 1).map((item, index) => (
+                <li key={index} dangerouslySetInnerHTML={{ __html: item }}></li>
+              ))}
+              {vestibularTechniquesExpanded && 
+                vestibularTechniques.slice(1).map((item, index) => (
+                  <li key={index + 1} dangerouslySetInnerHTML={{ __html: item }}></li>
+                ))
+              }
             </ul>
             <button 
               className="expand-button" 
@@ -235,36 +332,108 @@ function MainPage() {
               className={`recommendation-image ${index === recommendationIndex ? 'active' : ''}`}
             />
           ))}
+          
+          <button 
+            onClick={() => handleRecommendationNav('prev')}
+            aria-label="תמונה קודמת"
+            style={{
+              position: 'absolute',
+              top: '50%',
+              transform: 'translateY(-50%)',
+              background: 'rgba(107, 70, 193, 0.4)',
+              border: 'none',
+              borderRadius: '50%',
+              width: '50px',
+              height: '50px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: 'pointer',
+              transition: 'all 0.3s ease',
+              zIndex: 10,
+              left: '20px',
+              color: 'white'
+            }}
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" fill="white"/>
+            </svg>
+          </button>
+          
+          <button 
+            onClick={() => handleRecommendationNav('next')}
+            aria-label="תמונה הבאה"
+            style={{
+              position: 'absolute',
+              top: '50%',
+              transform: 'translateY(-50%)',
+              background: 'rgba(107, 70, 193, 0.4)',
+              border: 'none',
+              borderRadius: '50%',
+              width: '50px',
+              height: '50px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: 'pointer',
+              transition: 'all 0.3s ease',
+              zIndex: 10,
+              right: '20px',
+              color: 'white'
+            }}
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" fill="white"/>
+            </svg>
+          </button>
         </div>
-        
-        <button 
-          className="carousel-arrow carousel-arrow-left" 
-          onClick={() => handleRecommendationNav('prev')}
-          aria-label="תמונה קודמת"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" fill="white"/>
-          </svg>
-        </button>
-        
-        <button 
-          className="carousel-arrow carousel-arrow-right" 
-          onClick={() => handleRecommendationNav('next')}
-          aria-label="תמונה הבאה"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" fill="white"/>
-          </svg>
-        </button>
       </div>
 
       {/* Contact Section */}
       <section id="contact" className="contact">
         <h2>צור קשר</h2>
-        <form className="contact-form" action="mailto:galitush1@gmail.com" method="post" encType="text/plain">
-          <input type="text" name="name" placeholder="שם מלא" required />
-          <input type="email" name="email" placeholder="אימייל" required />
-          <textarea name="message" placeholder="הודעה" required></textarea>
+        <form className="contact-form" onSubmit={handleSubmit}>
+          <div className="input-group">
+            <input 
+              type="text" 
+              name="name" 
+              placeholder="שם מלא" 
+              value={formData.name}
+              onChange={handleInputChange}
+              maxLength={100}
+              className={errors.name ? 'error' : ''}
+              dir="rtl"
+              lang="he"
+            />
+            {errors.name && <span className="error-message">{errors.name}</span>}
+          </div>
+          <div className="input-group">
+            <input 
+              type="text" 
+              name="email" 
+              placeholder="אימייל" 
+              value={formData.email}
+              onChange={handleInputChange}
+              autoComplete="email"
+              className={errors.email ? 'error' : ''}
+              dir="ltr"
+              lang="en"
+            />
+            {errors.email && <span className="error-message">{errors.email}</span>}
+          </div>
+          <div className="input-group">
+            <textarea 
+              name="message" 
+              placeholder="הודעה" 
+              value={formData.message}
+              onChange={handleInputChange}
+              maxLength={1000}
+              className={errors.message ? 'error' : ''}
+              dir="rtl"
+              lang="he"
+            ></textarea>
+            {errors.message && <span className="error-message">{errors.message}</span>}
+          </div>
           <button type="submit">שלח הודעה</button>
         </form>
         
@@ -297,13 +466,13 @@ function MainPage() {
           </a>
         </div>
 
-        <div className="map">
+        <div className="map" style={{ width: '100%', margin: 0, padding: 0 }}>
           <iframe
             title="מיקום הקליניקה"
             src="https://www.google.com/maps?q=עמק+יזרעאל+קדימה+צורן&output=embed"
             width="100%"
             height="200"
-            style={{ border: 0 }}
+            style={{ border: 0, margin: 0, padding: 0 }}
             allowFullScreen={false}
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
@@ -312,23 +481,16 @@ function MainPage() {
       </section>
 
       {/* Footer */}
-      <footer className="footer">
-        <div className="footer-content">
-          <div className="footer-brand" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '20px' }}>
-            <img src={fullLogo} alt="גלית ריכטר לוגו" style={{ height: '68px', objectFit: 'contain' }} />
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-              <div className="brand-name">גלית ריכטר</div>
-              <div className="brand-subtitle" style={{ fontSize: '1.3rem', fontWeight: 'bold' }}>פיזיותרפיה</div>
-            </div>
-          </div>
-          <div style={{ textAlign: 'center', marginTop: 0, marginBottom: 0, fontSize: '1rem', lineHeight: 1 }}>
-            עמק יזרעאל 14, קדימה | 2025 ©
-          </div>
-          <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px'}}>
-            <span><a href="tel:+972526598076">052-6598076</a></span>
+      <Footer />
+      
+      {/* Success Popup */}
+      {showSuccessPopup && (
+        <div className="success-popup">
+          <div className="success-popup-content">
+            <span>אימייל נשלח</span>
           </div>
         </div>
-      </footer>
+      )}
     </>
   )
 }

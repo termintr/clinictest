@@ -97,26 +97,53 @@ function Layout({ children }: LayoutProps) {
         <button className="hamburger" aria-label="תפריט" onClick={() => setMenuOpen(!menuOpen)}>
           <img src={hamburgerImg} alt="תפריט" />
         </button>
+      </nav>
 
-        <ul className={`nav-links${menuOpen ? ' open' : ''}`}>
-          <li className="close-button-container">
-            <button className="close-button" onClick={() => setMenuOpen(false)} aria-label="סגור תפריט">
-              ✕
-            </button>
-          </li>
-          <li><a href="#" onClick={() => handleNavigation('/')}>🏠 בית</a></li>
-          <li><a href="#" onClick={() => handleNavigation('/#about')}>👤 אודות</a></li>
-          <li><a href="#" onClick={() => handleNavigation('/#services')}>🛠️ שירותים</a></li>
-          <li><a href="#" onClick={() => handleNavigation('/#techniques')}>🔧 טכניקות טיפוליות</a></li>
-          <li><a href="#" onClick={() => handleNavigation('/#testimonials')}>💬 המלצות</a></li>
-          <li>
-            <div className="nav-item-with-submenu">
+      {/* Full Screen Menu Overlay */}
+      <div className={`menu-overlay ${menuOpen ? 'open' : ''}`}>
+        <div className="menu-container">
+          <button className="menu-close-button" onClick={() => setMenuOpen(false)} aria-label="סגור תפריט">
+            ✕
+          </button>
+          
+          <div className="menu-content">
+            <div className="menu-item">
+              <a href="#" onClick={() => handleNavigation('/')}>ראשי</a>
+            </div>
+            
+            <div className="menu-separator"></div>
+            
+            <div className="menu-item">
+              <a href="#" onClick={() => handleNavigation('/#about')}>אודות</a>
+            </div>
+            
+            <div className="menu-separator"></div>
+            
+            <div className="menu-item">
+              <a href="#" onClick={() => handleNavigation('/#services')}>שירותים</a>
+            </div>
+            
+            <div className="menu-separator"></div>
+            
+            <div className="menu-item">
+              <a href="#" onClick={() => handleNavigation('/#techniques')}>טכניקות טיפוליות</a>
+            </div>
+            
+            <div className="menu-separator"></div>
+            
+            <div className="menu-item">
+              <a href="#" onClick={() => handleNavigation('/#testimonials')}>המלצות</a>
+            </div>
+            
+            <div className="menu-separator"></div>
+            
+            <div className="menu-item">
               <a href="#" onClick={(e) => {
                 e.preventDefault()
                 setProfessionalInfoExpanded(!professionalInfoExpanded)
               }}>
-                📋 מידע מקצועי
-                <span className="arrow-icon">
+                מידע מקצועי
+                <span className="menu-arrow">
                   {professionalInfoExpanded ? (
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
                       <path d="M7 10l5 5 5-5z"/>
@@ -129,22 +156,40 @@ function Layout({ children }: LayoutProps) {
                 </span>
               </a>
               {professionalInfoExpanded && (
-                <ul className="submenu">
-                  <li><a href="#" onClick={() => {
-                    handleNavigation('/professional-info#pelvic-floor')
-                    setProfessionalInfoExpanded(false)
-                  }}>בתחום רצפת האגן</a></li>
-                  <li><a href="#" onClick={() => {
-                    handleNavigation('/professional-info#vestibular')
-                    setProfessionalInfoExpanded(false)
-                  }}>בתחום הוסטיבולרי</a></li>
-                </ul>
+                <div className="menu-submenu">
+                  <div className="menu-subitem">
+                    <a href="#" onClick={() => {
+                      handleNavigation('/professional-info#pelvic-floor')
+                      setProfessionalInfoExpanded(false)
+                    }}>בתחום רצפת האגן</a>
+                  </div>
+                  <div className="menu-subitem">
+                    <a href="#" onClick={() => {
+                      handleNavigation('/professional-info#vestibular')
+                      setProfessionalInfoExpanded(false)
+                    }}>בתחום הוסטיבולרי</a>
+                  </div>
+                </div>
               )}
             </div>
-          </li>
-          <li><a href="#" onClick={() => handleNavigation('/#contact')}>✉️ צור קשר</a></li>
-        </ul>
-      </nav>
+            
+            <div className="menu-separator"></div>
+            
+            <div className="menu-item">
+              <a href="#" onClick={() => {
+                window.open('https://www.ipts.org.il/?CategoryID=721', '_blank', 'noopener,noreferrer')
+                setMenuOpen(false)
+              }}>החזרים מביטוחים</a>
+            </div>
+            
+            <div className="menu-separator"></div>
+            
+            <div className="menu-item">
+              <a href="#" onClick={() => handleNavigation('/#contact')}>צור קשר</a>
+            </div>
+          </div>
+        </div>
+      </div>
 
       {children}
     </div>
