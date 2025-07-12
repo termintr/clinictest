@@ -1,8 +1,21 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Footer from './Footer'
 
 function ProfessionalInfo() {
   const [expandedItems, setExpandedItems] = useState<{ [key: string]: boolean }>({})
+
+  // Handle hash navigation on mount
+  useEffect(() => {
+    if (window.location.hash) {
+      const id = window.location.hash.replace('#', '')
+      const el = document.getElementById(id)
+      if (el) {
+        setTimeout(() => {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        }, 100)
+      }
+    }
+  }, [])
 
   const pelvicFloorFAQs = [
     {

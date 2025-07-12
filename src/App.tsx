@@ -4,25 +4,22 @@ import { useEffect } from 'react'
 import Layout from './components/Layout'
 import MainPage from './components/MainPage'
 import ProfessionalInfo from './components/ProfessionalInfo'
+import { trackPageView } from './utils/analytics'
 
 function AppContent() {
   const navigate = useNavigate()
   const location = useLocation()
 
-  useEffect(() => {
-    // Handle hash-based routing from 404.html redirect
-    const hash = window.location.hash
-    if (hash && hash.startsWith('#/')) {
-      const path = hash.substring(1) // Remove the # symbol
-      navigate(path)
-      // Clear the hash from the URL
-      window.history.replaceState(null, '', window.location.pathname)
-    }
-  }, [navigate])
 
-  // Scroll to top on route change and page load
+
+  // Scroll to top on route change, but not when there's a hash
   useEffect(() => {
     const scrollToTop = () => {
+      // Don't scroll to top if there's a hash in the URL
+      if (window.location.hash) {
+        return
+      }
+      
       setTimeout(() => {
         window.scrollTo({
           top: 0,
@@ -33,6 +30,9 @@ function AppContent() {
     }
     
     scrollToTop()
+    
+    // Track page views with Google Analytics
+    trackPageView(location.pathname + location.search)
   }, [location.pathname])
 
   return (

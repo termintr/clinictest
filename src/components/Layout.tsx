@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import hamburgerImg from '../../public/assets/Hamburger.png'
 import topbarLogo from '../../public/assets/topbarlogo.png'
 import wazeImg from '../../public/assets/waze.png'
+import { trackPhoneCall, trackWhatsAppClick, trackWazeClick } from '../utils/analytics'
 
 interface LayoutProps {
   children: React.ReactNode
@@ -24,37 +25,22 @@ function Layout({ children }: LayoutProps) {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  // Keyboard navigation support
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      // Close menu on Escape key
-      if (e.key === 'Escape' && menuOpen) {
-        setMenuOpen(false)
-      }
-      
-      // Close professional info submenu on Escape key
-      if (e.key === 'Escape' && professionalInfoExpanded) {
-        setProfessionalInfoExpanded(false)
-      }
-    }
-
-    document.addEventListener('keydown', handleKeyDown)
-    return () => document.removeEventListener('keydown', handleKeyDown)
-  }, [menuOpen, professionalInfoExpanded])
-
   const handleNavClick = () => {
     setMenuOpen(false)
   }
 
   const handlePhoneCall = () => {
+    trackPhoneCall('navbar_phone')
     window.location.href = 'tel:+972526598076'
   }
 
   const handleWhatsApp = () => {
+    trackWhatsAppClick('floating_button')
     window.open('https://wa.me/972526598076', '_blank')
   }
 
   const handleWaze = () => {
+    trackWazeClick('floating_button')
     window.open('waze://?ll=32.27768123878298,34.90627884864808&navigate=yes', '_blank')
   }
 
@@ -69,16 +55,16 @@ function Layout({ children }: LayoutProps) {
     if (path.includes('#')) {
       // Handle anchor links for main page sections
       const [route, anchor] = path.split('#')
-      navigate(route)
-      setMenuOpen(false)
       
-      // Wait for navigation to complete, then scroll to anchor
-      setTimeout(() => {
-        const element = document.getElementById(anchor)
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' })
-        }
-      }, 100)
+      if (location.pathname === route) {
+        // Already on the target page, use native anchor navigation
+        setMenuOpen(false)
+        window.location.hash = anchor
+      } else {
+        // Navigate to different page with anchor
+        navigate(path)
+        setMenuOpen(false)
+      }
     } else {
       // Handle regular page navigation
       navigate(path)
@@ -88,11 +74,6 @@ function Layout({ children }: LayoutProps) {
 
   return (
     <div className="App">
-      {/* Skip to main content link for screen readers */}
-      <a href="#main-content" className="skip-link">
-        דלג לתוכן הראשי
-      </a>
-
       {/* Floating Waze Button */}
       <button className="waze-float" onClick={handleWaze} aria-label="נווט עם וויז">
         <img src={wazeImg} alt="נווט עם וויז" />
@@ -131,31 +112,31 @@ function Layout({ children }: LayoutProps) {
           
           <div className="menu-content">
             <div className="menu-item">
-              <a href="#" onClick={() => handleNavigation('/')}>ראשי</a>
+              <a href="/" onClick={() => setMenuOpen(false)}>ראשי</a>
             </div>
             
             <div className="menu-separator"></div>
             
             <div className="menu-item">
-              <a href="#" onClick={() => handleNavigation('/#about')}>אודות</a>
+              <a href="/#about" onClick={() => setMenuOpen(false)}>אודות</a>
             </div>
             
             <div className="menu-separator"></div>
             
             <div className="menu-item">
-              <a href="#" onClick={() => handleNavigation('/#services')}>שירותים</a>
+              <a href="/#services" onClick={() => setMenuOpen(false)}>שירותים</a>
             </div>
             
             <div className="menu-separator"></div>
             
             <div className="menu-item">
-              <a href="#" onClick={() => handleNavigation('/#techniques')}>טכניקות טיפוליות</a>
+              <a href="/#techniques" onClick={() => setMenuOpen(false)}>טכניקות טיפוליות</a>
             </div>
             
             <div className="menu-separator"></div>
             
             <div className="menu-item">
-              <a href="#" onClick={() => handleNavigation('/#testimonials')}>המלצות</a>
+              <a href="/#testimonials" onClick={() => setMenuOpen(false)}>המלצות</a>
             </div>
             
             <div className="menu-separator"></div>
@@ -164,11 +145,9 @@ function Layout({ children }: LayoutProps) {
               <a href="#" onClick={(e) => {
                 e.preventDefault()
                 setProfessionalInfoExpanded(!professionalInfoExpanded)
-              }}
-                 aria-expanded={professionalInfoExpanded}
-                 aria-controls="professional-info-submenu">
+              }}>
                 מידע מקצועי
-                <span className="menu-arrow" aria-hidden="true">
+                <span className="menu-arrow">
                   {professionalInfoExpanded ? (
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
                       <path d="M7 10l5 5 5-5z"/>
@@ -181,17 +160,17 @@ function Layout({ children }: LayoutProps) {
                 </span>
               </a>
               {professionalInfoExpanded && (
-                <div className="menu-submenu" id="professional-info-submenu" role="region" aria-label="תת-תפריט מידע מקצועי">
+                <div className="menu-submenu">
                   <div className="menu-subitem">
-                    <a href="#" onClick={() => {
-                      handleNavigation('/professional-info#pelvic-floor')
+                    <a href="/professional-info#pelvic-floor" onClick={() => {
                       setProfessionalInfoExpanded(false)
+                      setMenuOpen(false)
                     }}>בתחום רצפת האגן</a>
                   </div>
                   <div className="menu-subitem">
-                    <a href="#" onClick={() => {
-                      handleNavigation('/professional-info#vestibular')
+                    <a href="/professional-info#vestibular" onClick={() => {
                       setProfessionalInfoExpanded(false)
+                      setMenuOpen(false)
                     }}>בתחום הוסטיבולרי</a>
                   </div>
                 </div>
@@ -210,16 +189,13 @@ function Layout({ children }: LayoutProps) {
             <div className="menu-separator"></div>
             
             <div className="menu-item">
-              <a href="#" onClick={() => handleNavigation('/#contact')}>צור קשר</a>
+              <a href="/#contact" onClick={() => setMenuOpen(false)}>צור קשר</a>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Main Content */}
-      <main id="main-content" role="main">
-        {children}
-      </main>
+      {children}
     </div>
   )
 }

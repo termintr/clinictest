@@ -90,6 +90,31 @@ function MainPage() {
     return () => clearInterval(interval)
   }, [recommendationImages.length, isCarouselPaused])
 
+  useEffect(() => {
+    const handleHashNavigation = () => {
+      if (window.location.hash) {
+        const id = window.location.hash.replace('#', '')
+        const el = document.getElementById(id)
+        if (el) {
+          setTimeout(() => {
+            el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+          }, 100)
+        }
+      }
+    }
+
+    // Handle initial hash on mount
+    handleHashNavigation()
+
+    // Listen for hash changes
+    const handleHashChange = () => {
+      handleHashNavigation()
+    }
+
+    window.addEventListener('hashchange', handleHashChange)
+    return () => window.removeEventListener('hashchange', handleHashChange)
+  }, [])
+
   const handleRecommendationNav = (direction: 'prev' | 'next') => {
     setIsCarouselPaused(true)
     if (direction === 'prev') {
@@ -300,6 +325,7 @@ function MainPage() {
           </div>
           <div className="service-card">
             <h3>בתחום הוסטיבולרי:</h3>
+            <div id="vestibular"></div>
             <ul>
               {vestibularTechniques.slice(0, 1).map((item, index) => (
                 <li key={index} dangerouslySetInnerHTML={{ __html: item }}></li>
