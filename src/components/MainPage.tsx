@@ -2,14 +2,14 @@ import { useState, useEffect } from 'react'
 import emailjs from '@emailjs/browser'
 import carouselMain from '../../public/assets/carouselMain.jpg'
 import carousel1 from '../../public/assets/carousel1.jpg'
-import carousel2 from '../../public/assets/carousel2.jpg'
+import carousel2 from '../../public/assets/carousel2.jpeg'
+import carousel3 from '../../public/assets/carousel3.jpg'
 import aboutImg from '../../public/assets/aboutme.png'
 import recommendation1 from '../../public/assets/recommendation1.jpg'
 import recommendation2 from '../../public/assets/recommendation2.jpg'
 import recommendation3 from '../../public/assets/recommendation3.jpg'
 import recommendation4 from '../../public/assets/recommendation4.jpg'
 import recommendation5 from '../../public/assets/recommendation5.jpeg'
-import fullLogo from '../../public/assets/fulllogo.png'
 import Footer from './Footer'
 
 function MainPage() {
@@ -34,7 +34,7 @@ function MainPage() {
   })
   const [showSuccessPopup, setShowSuccessPopup] = useState(false)
 
-  const carouselImages = [carouselMain, carousel1, carousel2]
+  const carouselImages = [carouselMain, carousel1, carousel2, carousel3]
   const recommendationImages = [recommendation1, recommendation2, recommendation3, recommendation4, recommendation5]
 
   const pelvicFloorItems = [
@@ -189,7 +189,7 @@ function MainPage() {
   return (
     <>
       {/* Hero Carousel */}
-      <section id="hero" className="hero">
+      <section id="hero" className="hero" itemScope itemType="https://schema.org/MedicalBusiness">
         <div className="carousel">
           {carouselImages.map((image, index) => (
             <img
@@ -200,40 +200,42 @@ function MainPage() {
             />
           ))}
           <div className="carousel-overlay">
-            <h1>גלית ריכטר</h1>
+            <h1 itemProp="name">גלית ריכטר</h1>
             <h1>פיזיותרפיה</h1>
-            <p>שיקום רצפת האגן הנשית</p>
+            <p itemProp="description">שיקום רצפת האגן הנשית</p>
             <p>שיקום וסטיבולרי (טיפול בסחרחורת)</p>
-            <p className="carousel-subtitle">קליניקה בקדימה</p>
+            <p className="carousel-subtitle" itemProp="address" itemScope itemType="https://schema.org/PostalAddress">
+              <span itemProp="addressLocality">קליניקה בקדימה</span>
+            </p>
           </div>
         </div>
       </section>
 
       {/* About Section */}
-      <section id="about" className="about">
+      <section id="about" className="about" itemScope itemType="https://schema.org/Person">
         <h2>מי אני</h2>
         <div className="about-content">
-          <img src={aboutImg} alt="גלית ריכטר" />
-          <p>אמא ל-3 ושחקנית כדורשת בנשמה 😊<br/>
-          פיזיותרפיסטית מוסמכת בוגרת אוניברסיטת ת״א משנת 2006 ומנהלת מכון פיזיותרפיה בכללית, מדריכה קלינית ומטפלת גם במגוון הבעיות האורטופדיות למיניהן.<br/><br/>
-          עיקר האהבות שלי בעבודה מתרכזות בשני תחומים שונים בהם התמחיתי:<br/><br/>
-          <span className="numbered-list">
-          1. <strong>רצפת האגן הנשית</strong> - אני משתמשת בטכניקות מתקדמות ומתעדכנת כל הזמן בפיתוחים הקיימים בתחום. מביאה לטיפול את הרוגע שלי, יצירת סביבה בטוחה ונעימה למטופלת ומתאימה כמו חליפה לכל אחת את הטיפול בשבילה.<br/><br/>
-          2. <strong>סחרחורות</strong> - תחום מאוד מבלבל ומצריך ידע עמוק כדי לפתור בעיות מורכבות, לא כל הסחרחורות הן ״קריסטלים״ שזזים באוזן וכאן נכנס תחום השיקום הוסטיבולרי המרתק שבו גם למדתי לטפל ולעזור.<br/><br/>
-          </span>
-          <span className="highlighted-text" style={{ fontSize: '1.4rem' }}>
-          מטופלים שנכנסים לטיפול עם חשש ופחד, תמיד יוצאים עם אותו המשפט -״זה בכלל לא נורא כמו שחשבתי״.<br/><br/>
-          </span>
-          אני רואה בעבודתי שליחות ומזל גדול שיש לי הזכות לעסוק במה שאני אוהבת לעשות, ובו זמנית לשפר איכות חיים לאנשים רבים.</p>
+          <img src={aboutImg} alt="גלית ריכטר" itemProp="image" />
+                      <p itemProp="description">אמא ל-3 ושחקנית כדורשת בנשמה 😊<br/>
+            פיזיותרפיסטית מוסמכת בוגרת אוניברסיטת ת״א משנת 2006 ומנהלת מכון פיזיותרפיה בכללית, מדריכה קלינית ומטפלת גם במגוון הבעיות האורטופדיות למיניהן.<br/><br/>
+            עיקר האהבות שלי בעבודה מתרכזות בשני תחומים שונים בהם התמחיתי:<br/><br/>
+            <span className="numbered-list">
+            1. <strong itemProp="jobTitle">רצפת האגן הנשית</strong> - אני משתמשת בטכניקות מתקדמות ומתעדכנת כל הזמן בפיתוחים הקיימים בתחום. מביאה לטיפול את הרוגע שלי, יצירת סביבה בטוחה ונעימה למטופלת ומתאימה כמו חליפה לכל אחת את הטיפול בשבילה.<br/><br/>
+            2. <strong>סחרחורות</strong> - תחום מאוד מבלבל ומצריך ידע עמוק כדי לפתור בעיות מורכבות, לא כל הסחרחורות הן ״קריסטלים״ שזזים באוזן וכאן נכנס תחום השיקום הוסטיבולרי המרתק שבו גם למדתי לטפל ולעזור.<br/><br/>
+            </span>
+            <span className="highlighted-text" style={{ fontSize: '1.4rem' }}>
+            מטופלים שנכנסים לטיפול עם חשש ופחד, תמיד יוצאים עם אותו המשפט -״זה בכלל לא נורא כמו שחשבתי״.<br/><br/>
+            </span>
+            אני רואה בעבודתי שליחות ומזל גדול שיש לי הזכות לעסוק במה שאני אוהבת לעשות, ובו זמנית לשפר איכות חיים לאנשים רבים.</p>
         </div>
       </section>
 
       {/* Services Section */}
-      <section id="services" className="services">
+      <section id="services" className="services" itemScope itemType="https://schema.org/OfferCatalog">
         <h2>במה אוכל לעזור?</h2>
-        <div className="services-grid">
-          <div className="service-card">
-            <h3>בתחום רצפת האגן:</h3>
+        <div className="services-grid" itemProp="itemListElement">
+          <div className="service-card" itemScope itemType="https://schema.org/Offer">
+            <h3 itemProp="name">בתחום רצפת האגן:</h3>
             <ul>
               {pelvicFloorItems.slice(0, 2).map((item, index) => (
                 <li key={index}><strong>{item}</strong></li>
@@ -251,8 +253,8 @@ function MainPage() {
               {pelvicFloorExpanded ? 'ראה פחות' : 'ראה עוד...'}
             </button>
           </div>
-          <div className="service-card">
-            <h3>בתחום הוסטיבולרי:</h3>
+          <div className="service-card" itemScope itemType="https://schema.org/Offer">
+            <h3 itemProp="name">בתחום הוסטיבולרי:</h3>
             <ul>
               {vestibularItems.slice(0, 1).map((item, index) => (
                 <li key={index}><strong>{item}</strong></li>
@@ -323,20 +325,22 @@ function MainPage() {
         <h2>מטופלים מספרים</h2>
       </section>
       
-      <div className="recommendation-carousel">
+      <div className="recommendation-carousel" role="region" aria-label="המלצות מטופלים">
         <div className="recommendation-container">
           {recommendationImages.map((image, index) => (
             <img 
               key={index}
               src={image} 
-              alt={`המלצה ${index + 1}`} 
+              alt={`המלצת מטופל ${index + 1} - פיזיותרפיה גלית ריכטר`} 
               className={`recommendation-image ${index === recommendationIndex ? 'active' : ''}`}
+              loading="lazy"
             />
           ))}
           
           <button 
             onClick={() => handleRecommendationNav('prev')}
             aria-label="תמונה קודמת"
+            aria-controls="recommendation-carousel"
             style={{
               position: 'absolute',
               top: '50%',
@@ -356,7 +360,7 @@ function MainPage() {
               color: 'white'
             }}
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" fill="white"/>
             </svg>
           </button>
@@ -364,6 +368,7 @@ function MainPage() {
           <button 
             onClick={() => handleRecommendationNav('next')}
             aria-label="תמונה הבאה"
+            aria-controls="recommendation-carousel"
             style={{
               position: 'absolute',
               top: '50%',
@@ -383,7 +388,7 @@ function MainPage() {
               color: 'white'
             }}
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" fill="white"/>
             </svg>
           </button>
@@ -391,12 +396,14 @@ function MainPage() {
       </div>
 
       {/* Contact Section */}
-      <section id="contact" className="contact">
+      <section id="contact" className="contact" itemScope itemType="https://schema.org/ContactPage">
         <h2>צור קשר</h2>
-        <form className="contact-form" onSubmit={handleSubmit}>
+        <form className="contact-form" onSubmit={handleSubmit} aria-label="טופס יצירת קשר">
           <div className="input-group">
+            <label htmlFor="name" className="sr-only">שם מלא</label>
             <input 
               type="text" 
+              id="name"
               name="name" 
               placeholder="שם מלא" 
               value={formData.name}
@@ -405,12 +412,17 @@ function MainPage() {
               className={errors.name ? 'error' : ''}
               dir="rtl"
               lang="he"
+              required
+              aria-describedby={errors.name ? "name-error" : undefined}
+              aria-invalid={errors.name ? "true" : "false"}
             />
-            {errors.name && <span className="error-message">{errors.name}</span>}
+            {errors.name && <span id="name-error" className="error-message" role="alert" aria-live="polite">{errors.name}</span>}
           </div>
           <div className="input-group">
+            <label htmlFor="email" className="sr-only">אימייל</label>
             <input 
-              type="text" 
+              type="email" 
+              id="email"
               name="email" 
               placeholder="אימייל" 
               value={formData.email}
@@ -419,11 +431,16 @@ function MainPage() {
               className={errors.email ? 'error' : ''}
               dir="ltr"
               lang="en"
+              required
+              aria-describedby={errors.email ? "email-error" : undefined}
+              aria-invalid={errors.email ? "true" : "false"}
             />
-            {errors.email && <span className="error-message">{errors.email}</span>}
+            {errors.email && <span id="email-error" className="error-message" role="alert" aria-live="polite">{errors.email}</span>}
           </div>
           <div className="input-group">
+            <label htmlFor="message" className="sr-only">הודעה</label>
             <textarea 
+              id="message"
               name="message" 
               placeholder="הודעה" 
               value={formData.message}
@@ -432,33 +449,37 @@ function MainPage() {
               className={errors.message ? 'error' : ''}
               dir="rtl"
               lang="he"
+              required
+              aria-describedby={errors.message ? "message-error" : undefined}
+              aria-invalid={errors.message ? "true" : "false"}
             ></textarea>
-            {errors.message && <span className="error-message">{errors.message}</span>}
+            {errors.message && <span id="message-error" className="error-message" role="alert" aria-live="polite">{errors.message}</span>}
           </div>
-          <button type="submit">שלח הודעה</button>
+          <button type="submit" aria-describedby="submit-description">שלח הודעה</button>
+          <div id="submit-description" className="sr-only">שלח את הטופס ליצירת קשר</div>
         </form>
         
-        <div className="contact-info redesigned-contact-info">
-          <a href="tel:+972526598076" className="contact-card call-card" aria-label="טלפון">
+        <div className="contact-info redesigned-contact-info" role="group" aria-label="אפשרויות יצירת קשר">
+          <a href="tel:+972526598076" className="contact-card call-card" aria-label="התקשר בטלפון - 052-6598076" itemProp="telephone">
             <span className="contact-label">טלפון</span>
-            <span className="contact-icon">
+            <span className="contact-icon" aria-hidden="true">
               <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none">
                 <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" fill="#fff"/>
               </svg>
             </span>
           </a>
-          <a href="https://wa.me/972526598076" target="_blank" rel="noopener noreferrer" className="contact-card whatsapp-card" aria-label="Whatsapp">
+          <a href="https://wa.me/972526598076" target="_blank" rel="noopener noreferrer" className="contact-card whatsapp-card" aria-label="שלח הודעה בוואטסאפ">
             <span className="contact-label">Whatsapp</span>
-            <span className="contact-icon">
+            <span className="contact-icon" aria-hidden="true">
               <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 32 32" fill="none">
                 <circle cx="16" cy="16" r="16" fill="#25D366"/>
                 <path d="M23.472 19.339c-.355-.177-2.104-1.037-2.43-1.155-.326-.118-.563-.177-.8.178-.237.355-.91 1.155-1.117 1.392-.207.237-.414.266-.769.089-.355-.178-1.5-.553-2.86-1.763-1.057-.943-1.771-2.104-1.98-2.459-.207-.355-.022-.546.155-.723.159-.158.355-.414.533-.62.178-.207.237-.355.355-.592.118-.237.06-.444-.03-.622-.089-.178-.8-1.921-1.096-2.633-.289-.695-.583-.601-.8-.612-.207-.009-.444-.011-.681-.011-.237 0-.622.089-.949.444-.326.355-1.243 1.215-1.243 2.963 0 1.748 1.274 3.437 1.452 3.674.178.237 2.51 3.833 6.077 5.225.85.292 1.513.466 2.03.596.853.204 1.63.175 2.243.106.684-.076 2.104-.859 2.403-1.689.296-.83.296-1.541.207-1.689-.089-.148-.326-.237-.681-.414z" fill="#fff"/>
               </svg>
             </span>
           </a>
-          <a href="https://www.facebook.com/profile.php?id=61578053394490" target="_blank" rel="noopener noreferrer" className="contact-card facebook-card" aria-label="פייסבוק">
+          <a href="https://www.facebook.com/profile.php?id=61578053394490" target="_blank" rel="noopener noreferrer" className="contact-card facebook-card" aria-label="עקבו אחרינו בפייסבוק">
             <span className="contact-label">פייסבוק</span>
-            <span className="contact-icon">
+            <span className="contact-icon" aria-hidden="true">
               <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 32 32" fill="none">
                 <circle cx="16" cy="16" r="16" fill="#fff"/>
                 <path d="M18.5 10.5h2V7.5c-.35-.05-1.55-.15-2.95-.15-2.92 0-4.55 1.8-4.55 5.1v2.05H9.5v3.1h3.5V24h4.1v-6.4h2.75l.4-3.1h-3.15v-1.6c0-.9.25-1.5 1.5-1.5z" fill="#1877F3"/>
@@ -469,7 +490,7 @@ function MainPage() {
 
         <div className="map" style={{ width: '100%', margin: 0, padding: 0 }}>
           <iframe
-            title="מיקום הקליניקה"
+            title="מיקום הקליניקה - עמק יזרעאל 14, קדימה"
             src="https://www.google.com/maps?q=עמק+יזרעאל+קדימה+צורן&output=embed"
             width="100%"
             height="200"
@@ -477,6 +498,7 @@ function MainPage() {
             allowFullScreen={false}
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
+            aria-label="מפת מיקום הקליניקה"
           ></iframe>
         </div>
       </section>
@@ -486,9 +508,10 @@ function MainPage() {
       
       {/* Success Popup */}
       {showSuccessPopup && (
-        <div className="success-popup">
+        <div className="success-popup" role="dialog" aria-labelledby="success-title" aria-describedby="success-message">
           <div className="success-popup-content">
-            <span>אימייל נשלח</span>
+            <span id="success-title" role="alert" aria-live="assertive">אימייל נשלח</span>
+            <div id="success-message" className="sr-only">הטופס נשלח בהצלחה</div>
           </div>
         </div>
       )}

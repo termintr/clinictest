@@ -24,6 +24,24 @@ function Layout({ children }: LayoutProps) {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  // Keyboard navigation support
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Close menu on Escape key
+      if (e.key === 'Escape' && menuOpen) {
+        setMenuOpen(false)
+      }
+      
+      // Close professional info submenu on Escape key
+      if (e.key === 'Escape' && professionalInfoExpanded) {
+        setProfessionalInfoExpanded(false)
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown)
+    return () => document.removeEventListener('keydown', handleKeyDown)
+  }, [menuOpen, professionalInfoExpanded])
+
   const handleNavClick = () => {
     setMenuOpen(false)
   }
@@ -70,6 +88,11 @@ function Layout({ children }: LayoutProps) {
 
   return (
     <div className="App">
+      {/* Skip to main content link for screen readers */}
+      <a href="#main-content" className="skip-link">
+        דלג לתוכן הראשי
+      </a>
+
       {/* Floating Waze Button */}
       <button className="waze-float" onClick={handleWaze} aria-label="נווט עם וויז">
         <img src={wazeImg} alt="נווט עם וויז" />
@@ -141,9 +164,11 @@ function Layout({ children }: LayoutProps) {
               <a href="#" onClick={(e) => {
                 e.preventDefault()
                 setProfessionalInfoExpanded(!professionalInfoExpanded)
-              }}>
+              }}
+                 aria-expanded={professionalInfoExpanded}
+                 aria-controls="professional-info-submenu">
                 מידע מקצועי
-                <span className="menu-arrow">
+                <span className="menu-arrow" aria-hidden="true">
                   {professionalInfoExpanded ? (
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
                       <path d="M7 10l5 5 5-5z"/>
@@ -156,7 +181,7 @@ function Layout({ children }: LayoutProps) {
                 </span>
               </a>
               {professionalInfoExpanded && (
-                <div className="menu-submenu">
+                <div className="menu-submenu" id="professional-info-submenu" role="region" aria-label="תת-תפריט מידע מקצועי">
                   <div className="menu-subitem">
                     <a href="#" onClick={() => {
                       handleNavigation('/professional-info#pelvic-floor')
@@ -191,7 +216,10 @@ function Layout({ children }: LayoutProps) {
         </div>
       </div>
 
-      {children}
+      {/* Main Content */}
+      <main id="main-content" role="main">
+        {children}
+      </main>
     </div>
   )
 }

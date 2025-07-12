@@ -1,11 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <!-- Homepage -->
   <url>
     <loc>https://galitrichter.com/</loc>
+    <lastmod>2025-07-12</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="he" href="https://galitrichter.com/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://galitrichter.com/en/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://galitrichter.com/" />
   </url>
+  
+  <!-- Professional Info Page -->
   <url>
     <loc>https://galitrichter.com/professional-info</loc>
+    <lastmod>2025-07-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="he" href="https://galitrichter.com/professional-info" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://galitrichter.com/en/professional-info" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://galitrichter.com/professional-info" />
+  </url>
+  
+  <!-- Main Page Sections -->
+  <url>
+    <loc>https://galitrichter.com/#about</loc>
+    <lastmod>2025-07-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <url>
+    <loc>https://galitrichter.com/#services</loc>
+    <lastmod>2025-07-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <url>
+    <loc>https://galitrichter.com/#techniques</loc>
+    <lastmod>2025-07-12</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  
+  <url>
+    <loc>https://galitrichter.com/#testimonials</loc>
+    <lastmod>2025-07-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://galitrichter.com/#contact</loc>
+    <lastmod>2025-07-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Professional Info Sections -->
+  <url>
+    <loc>https://galitrichter.com/professional-info#pelvic-floor</loc>
+    <lastmod>2025-07-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://galitrichter.com/professional-info#vestibular</loc>
+    <lastmod>2025-07-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
 </urlset> 
