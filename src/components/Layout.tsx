@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import hamburgerImg from '../../public/assets/Hamburger.png'
 import topbarLogo from '../../public/assets/topbarlogo.png'
 import wazeImg from '../../public/assets/waze.png'
-import { trackPhoneCall, trackWhatsAppClick, trackWazeClick } from '../utils/analytics'
+import { trackContact, trackExternalLink, trackNavigation } from '../utils/analytics'
 
 interface LayoutProps {
   children: React.ReactNode
@@ -30,17 +30,17 @@ function Layout({ children }: LayoutProps) {
   }
 
   const handlePhoneCall = () => {
-    trackPhoneCall('navbar_phone')
+    trackContact.phoneCall('navbar_phone_button', '+972526598076')
     window.location.href = 'tel:+972526598076'
   }
 
   const handleWhatsApp = () => {
-    trackWhatsAppClick('floating_button')
+    trackContact.whatsappClick('floating_whatsapp_button', '+972526598076')
     window.open('https://wa.me/972526598076', '_blank')
   }
 
   const handleWaze = () => {
-    trackWazeClick('floating_button')
+    trackExternalLink.wazeNavigation('floating_waze_button')
     window.open('waze://?ll=32.27768123878298,34.90627884864808&navigate=yes', '_blank')
   }
 
@@ -112,31 +112,46 @@ function Layout({ children }: LayoutProps) {
           
           <div className="menu-content">
             <div className="menu-item">
-              <a href="/" onClick={() => setMenuOpen(false)}>ראשי</a>
+              <a href="/" onClick={() => {
+                setMenuOpen(false)
+                trackNavigation.menuClick('Home_Page', 'hamburger_menu')
+              }}>ראשי</a>
             </div>
             
             <div className="menu-separator"></div>
             
             <div className="menu-item">
-              <a href="/#about" onClick={() => setMenuOpen(false)}>אודות</a>
+              <a href="/#about" onClick={() => {
+                setMenuOpen(false)
+                trackNavigation.menuClick('About_Section', 'hamburger_menu')
+              }}>אודות</a>
             </div>
             
             <div className="menu-separator"></div>
             
             <div className="menu-item">
-              <a href="/#services" onClick={() => setMenuOpen(false)}>שירותים</a>
+              <a href="/#services" onClick={() => {
+                setMenuOpen(false)
+                trackNavigation.menuClick('Services_Section', 'hamburger_menu')
+              }}>שירותים</a>
             </div>
             
             <div className="menu-separator"></div>
             
             <div className="menu-item">
-              <a href="/#techniques" onClick={() => setMenuOpen(false)}>טכניקות טיפוליות</a>
+              <a href="/#techniques" onClick={() => {
+                setMenuOpen(false)
+                trackNavigation.menuClick('Treatment_Techniques_Section', 'hamburger_menu')
+              }}>טכניקות טיפוליות</a>
             </div>
             
             <div className="menu-separator"></div>
             
             <div className="menu-item">
-              <a href="/#testimonials" onClick={() => setMenuOpen(false)}>המלצות</a>
+              <a href="/#testimonials" onClick={() => {
+                setMenuOpen(false)
+                trackNavigation.menuClick('Testimonials_Section', 'hamburger_menu')
+              }}>המלצות</a>
             </div>
             
             <div className="menu-separator"></div>
@@ -165,12 +180,14 @@ function Layout({ children }: LayoutProps) {
                     <a href="/professional-info#pelvic-floor" onClick={() => {
                       setProfessionalInfoExpanded(false)
                       setMenuOpen(false)
+                      trackNavigation.menuClick('Pelvic_Floor_Therapy_Info', 'professional_info_submenu')
                     }}>בתחום רצפת האגן</a>
                   </div>
                   <div className="menu-subitem">
                     <a href="/professional-info#vestibular" onClick={() => {
                       setProfessionalInfoExpanded(false)
                       setMenuOpen(false)
+                      trackNavigation.menuClick('Vestibular_Therapy_Info', 'professional_info_submenu')
                     }}>בתחום הוסטיבולרי</a>
                   </div>
                 </div>
@@ -181,6 +198,7 @@ function Layout({ children }: LayoutProps) {
             
             <div className="menu-item">
               <a href="#" onClick={() => {
+                trackExternalLink.linkClick('Insurance_Refunds_Info', 'https://www.ipts.org.il/?CategoryID=721', 'hamburger_menu')
                 window.open('https://www.ipts.org.il/?CategoryID=721', '_blank', 'noopener,noreferrer')
                 setMenuOpen(false)
               }}>החזרים מביטוחים</a>
@@ -189,7 +207,10 @@ function Layout({ children }: LayoutProps) {
             <div className="menu-separator"></div>
             
             <div className="menu-item">
-              <a href="/#contact" onClick={() => setMenuOpen(false)}>צור קשר</a>
+              <a href="/#contact" onClick={() => {
+                setMenuOpen(false)
+                trackNavigation.menuClick('Contact_Section', 'hamburger_menu')
+              }}>צור קשר</a>
             </div>
           </div>
         </div>

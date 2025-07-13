@@ -4,13 +4,17 @@ import { useEffect } from 'react'
 import Layout from './components/Layout'
 import MainPage from './components/MainPage'
 import ProfessionalInfo from './components/ProfessionalInfo'
-import { trackPageView } from './utils/analytics'
+import { trackPageView, autoTrack } from './utils/analytics'
 
 function AppContent() {
   const navigate = useNavigate()
   const location = useLocation()
 
-
+  // Initialize automatic tracking
+  useEffect(() => {
+    autoTrack.externalLinks()
+    autoTrack.forms()
+  }, [])
 
   // Scroll to top on route change, but not when there's a hash
   useEffect(() => {

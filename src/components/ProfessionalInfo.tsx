@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import Footer from './Footer'
+import { trackContent } from '../utils/analytics'
 
 function ProfessionalInfo() {
   const [expandedItems, setExpandedItems] = useState<{ [key: string]: boolean }>({})
@@ -89,10 +90,18 @@ function ProfessionalInfo() {
   ]
 
   const toggleExpanded = (id: string) => {
+    const newState = !expandedItems[id]
     setExpandedItems(prev => ({
       ...prev,
-      [id]: !prev[id]
+      [id]: newState
     }))
+    
+    // Track expand/collapse
+    if (newState) {
+      trackContent.faqItemExpand(`FAQ_${id}`, 'professional_info_page')
+    } else {
+      trackContent.faqItemCollapse(`FAQ_${id}`, 'professional_info_page')
+    }
   }
 
   const renderFAQItem = (faq: { id: string; question: string; answer: string }) => {
@@ -101,6 +110,7 @@ function ProfessionalInfo() {
     
     const handleClick = () => {
       if (isRedirect && redirectUrl) {
+        trackContent.pdfDownload('Vestibular_Rehab_Info_PDF', 'professional_info_page')
         window.open(redirectUrl, '_blank', 'noopener,noreferrer')
       } else {
         toggleExpanded(faq.id)
