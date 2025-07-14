@@ -141,23 +141,34 @@ function Layout({ children }: LayoutProps) {
 
       {/* Navbar */}
       <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
-        <button
-          className={`phone-icon${!isPhone ? ' phone-icon-desktop' : ''}`}
-          onClick={isPhone ? handlePhoneCall : undefined}
-          aria-label="התקשר עכשיו"
-          tabIndex={isPhone ? 0 : -1}
-          style={!isPhone ? { pointerEvents: 'none', cursor: 'default' } : {}}
-        >
-          {!isPhone && (
+        {isPhone ? (
+          <a
+            href="tel:+972526598076"
+            className="phone-icon"
+            aria-label="התקשר עכשיו"
+            tabIndex={0}
+            style={{ textDecoration: 'none' }}
+          >
+            <svg aria-hidden="true" className="e-font-icon-svg e-fas-phone-alt" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+              <path d="M497.39 361.8l-112-48a24 24 0 0 0-28 6.9l-49.6 60.6A370.66 370.66 0 0 1 130.6 204.11l60.6-49.6a23.94 23.94 0 0 0 6.9-28l-48-112A24.16 24.16 0 0 0 122.6.61l-104 24A24 24 0 0 0 0 48c0 256.5 207.9 464 464 464a24 24 0 0 0 23.4-18.6l24-104a24.29 24.29 0 0 0-14.01-27.6z" fill="white"></path>
+            </svg>
+          </a>
+        ) : (
+          <button
+            className="phone-icon phone-icon-desktop"
+            aria-label="התקשר עכשיו"
+            tabIndex={-1}
+            style={{ pointerEvents: 'none', cursor: 'default' }}
+          >
             <span className="phone-text">
               <span className="phone-text-top">לקביעת פגישה</span>
               <span className="phone-text-bottom">052-6598076</span>
             </span>
-          )}
-          <svg aria-hidden="true" className="e-font-icon-svg e-fas-phone-alt" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-            <path d="M497.39 361.8l-112-48a24 24 0 0 0-28 6.9l-49.6 60.6A370.66 370.66 0 0 1 130.6 204.11l60.6-49.6a23.94 23.94 0 0 0 6.9-28l-48-112A24.16 24.16 0 0 0 122.6.61l-104 24A24 24 0 0 0 0 48c0 256.5 207.9 464 464 464a24 24 0 0 0 23.4-18.6l24-104a24.29 24.29 0 0 0-14.01-27.6z" fill="white"></path>
-          </svg>
-        </button>
+            <svg aria-hidden="true" className="e-font-icon-svg e-fas-phone-alt" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+              <path d="M497.39 361.8l-112-48a24 24 0 0 0-28 6.9l-49.6 60.6A370.66 370.66 0 0 1 130.6 204.11l60.6-49.6a23.94 23.94 0 0 0 6.9-28l-48-112A24.16 24.16 0 0 0 122.6.61l-104 24A24 24 0 0 0 0 48c0 256.5 207.9 464 464 464a24 24 0 0 0 23.4-18.6l24-104a24.29 24.29 0 0 0-14.01-27.6z" fill="white"></path>
+            </svg>
+          </button>
+        )}
         
         <div className="navbar-brand" onClick={handleLogoClick} style={{ cursor: 'pointer' }}>
           <img src={topbarLogo} alt="גלית ריכטר" />
