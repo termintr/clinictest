@@ -227,26 +227,43 @@ html {
 }
 
 .phone-icon {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background: var(--primary-color);
-  border: none;
-  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s ease;
+  gap: 0.5em;
+  padding: 0.5em 1.5em 0.5em 1em;
+  min-width: 150px;
+  height: 38px;
+  border-radius: 2em;
+  background: var(--primary-color);
+  border: none;
+  color: #fff;
+  font-size: 1.08em;
+  font-weight: 600;
+  cursor: pointer;
   box-shadow: 0 2px 8px rgba(107, 70, 193, 0.3);
-  overflow: hidden;
-  padding: 0;
+  position: absolute;
+  top: 1.2em;
+  right: 1.2em;
+  z-index: 10;
+  transition: background 0.3s, box-shadow 0.3s;
+  animation: phone-glow 6s ease-in-out infinite;
+}
+
+.phone-icon .phone-text {
+  margin-right: 0.5em;
+  color: #fff;
+  text-shadow: 0 1px 4px #000, 0 0 2px #000;
+  font-size: 1.08em;
+  font-family: inherit;
+  white-space: nowrap;
 }
 
 .phone-icon svg {
-  width: 18px;
-  height: 18px;
-  fill: white;
+  width: 1.2em;
+  height: 1.2em;
   flex-shrink: 0;
+  fill: #fff;
 }
 
 .phone-icon:hover {
@@ -255,11 +272,17 @@ html {
 }
 
 .navbar-brand {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  transform: translateX(-50%);
+  margin: auto 0;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex: 1;
-  margin: 0 10px;
+  pointer-events: none;
 }
 
 .navbar-brand img {
@@ -271,14 +294,11 @@ html {
 }
 
 .hamburger {
-  width: 40px;
-  height: 40px;
+  position: static;
+  margin-left: 0;
+  margin-right: auto;
   background: none;
   border: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .hamburger img {
@@ -1397,7 +1417,7 @@ section.contact h2,
     font-size: 1rem;
     padding: 4px 25px;
   }
-  
+
   .menu-separator {
     margin: 1px 0;
   }
@@ -1409,7 +1429,7 @@ section.contact h2,
     font-size: 1.2rem;
     padding: 4px 25px;
   }
-  
+
   .menu-subitem a {
     font-size: 0.9rem;
     padding: 3px 25px;
@@ -1489,7 +1509,7 @@ section.contact h2 {
   box-shadow: 0 4px 12px rgba(0, 102, 255, 0.4);
   transition: all 0.3s ease;
   color: white;
-}
+  }
 
 .accessibility-float:hover {
   transform: scale(1.1);
@@ -1653,4 +1673,92 @@ section.contact h2 {
 .reset-button:hover {
   background: #c8a2c8;
   transform: translateY(-1px);
+}
+
+@keyframes phone-glow {
+  0% {
+    box-shadow: 0 0 0 0 rgba(162,89,247,0.0), 0 2px 8px rgba(107, 70, 193, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 32px 10px #a259f7, 0 0 20px 5px #b388ff, 0 0 10px 2px #d1b3ff, 0 2px 8px rgba(107, 70, 193, 0.3);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(162,89,247,0.0), 0 2px 8px rgba(107, 70, 193, 0.3);
+  }
+}
+
+@media (max-width: 600px) {
+  .phone-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    padding: 0;
+    min-width: 0;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+  .phone-text {
+    display: none !important;
+  }
+}
+
+@media (min-width: 601px) {
+  .phone-icon {
+    pointer-events: none;
+    cursor: default !important;
+    padding: 1.5em 1em 1.5em 1em;
+    background: transparent !important;
+    box-shadow: none !important;
+    animation: none !important;
+    position: absolute;
+    top: 50%;
+    right: -0.5em;
+    margin-right: 0;
+    transform: translateY(-50%);
+    z-index: 10;
+  }
+  .phone-icon:hover {
+    background: transparent !important;
+    transform: none;
+    cursor: default !important;
+  }
+  .phone-icon svg {
+    filter: drop-shadow(0 2px 6px #000);
+  }
+  .phone-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    min-width: 90px;
+    margin-right: 0.5em;
+    text-align: right;
+  }
+  .phone-text-top, .phone-text-bottom {
+    display: block;
+    width: 100%;
+    white-space: nowrap;
+    font-size: 1.08em;
+    color: #fff;
+    text-shadow: 0 1px 4px #000, 0 0 2px #000;
+    line-height: 1.1;
+    font-family: inherit;
+  }
+  .phone-text-bottom {
+    text-align: center;
+    margin-top: 2px;
+  }
+}
+
+.desktop-phone-number {
+  display: none;
+}
+@media (min-width: 601px) {
+  .desktop-phone-label {
+    display: none !important;
+  }
+  .desktop-phone-number {
+    display: inline !important;
+  }
 }
